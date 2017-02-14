@@ -49,6 +49,13 @@ print 'File read in time: ', stop - start, ' sec.'
 # filter all 'Denied' lines
 df2 = df[df.msg != 'Denied']
 
+# TODO: next thing is to move out weekends by date from dataframe i.e. sat=day nr.5, sun=day nr.6
+# which can be done with In [11]: df2[df2.index.dayofweek < 5]
+
+# TODO: next thing is to move bank holidays
+
+
+
 # split 'info_5' field information into substrings
 # expand dataframe with 0,1,2 columns
 # where 1 = sent, 2 = received
@@ -111,5 +118,26 @@ except:
     print 'program exits'
     raise
 
+filename = './outputs/y_test'
+try:
+    np.save('./outputs/y_test', y_test)
+except:
+    print 'cannot save y_test to file'
+    print 'program exits'
+    raise
+
+filename = './outputs/X_test'
+try:
+    np.save('./outputs/X_test', X_test)
+except:
+    print 'cannot save X_test to file'
+    print 'program exits'
+    raise
+
+
+#np.save('./outputs/Y_test',y_test) for some reason this is not needed.
+
 print 'Model trained in time: ', stop - start, ' sec.'
 print 'Trained model saved to ./outputs directory with filename trained_model.sav'
+print 'Trained y_test saved to ./outputs directory with filename y_test.npy'
+print 'Trained X_test saved to ./outputs directory with filename X_test.npy'
